@@ -1,25 +1,19 @@
 #!/bin/bash
+set -e
+echo "Installing XRDP..."
 
-echo "=================================="
-echo " Installing XRDP"
-echo "=================================="
+if [[ "$OS" == "debian" ]]; then
+    $PKG_INSTALL xfce4 xfce4-goodies xrdp
+elif [[ "$OS" == "redhat" ]]; then
+    $PKG_INSTALL epel-release
+    $PKG_INSTALL tigervnc-server xrdp
+fi
 
-# Update system
-apt update -y
-
-# Install XRDP and desktop
-apt install -y xrdp xfce4 xfce4-goodies sudo
-
-# Set XFCE as default session for XRDP
-echo "xfce4-session" > /etc/skel/.xsession
+# XFCE default session
 echo "xfce4-session" > ~/.xsession
 
-# Enable and restart XRDP
+# Enable XRDP
 systemctl enable xrdp
 systemctl restart xrdp
 
-echo "=================================="
-echo " XRDP INSTALLED SUCCESSFULLY"
-echo " Port: 3389"
-echo " Login with your Linux username"
-echo "=================================="
+echo "XRDP installed. Port 3389."
