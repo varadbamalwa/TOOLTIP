@@ -1,5 +1,4 @@
-#!/bin/bash
-# run.sh — make everything executable and run installer
-
+git clone https://github.com/varadbamalwa/TOOLTIP.git
+cd TOOLTIP
 chmod +x install.sh scripts/*.sh
-/install.sh
+./install.sh
